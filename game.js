@@ -8,7 +8,7 @@ let config = {
         height :750,
     },
     
-    backgroundColor : 0xffff11,
+   // backgroundColor : 0xffff11,
     
     physics:{
         default:'arcade',
