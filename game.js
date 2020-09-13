@@ -8,7 +8,7 @@ let config = {
         height :750,
     },
     
-   // backgroundColor : 0xffff11,
+   
     
     physics:{
         default:'arcade',
@@ -40,24 +40,21 @@ let player_config = {
 
 function preload(){
     
-   // var load = this.add.text(750,375, "Loading...",{ font:"80px Roboto",fill: '#000000' });
-        //load.anchor(0.5,0.5);
-    
+   
     this.load.image("ground","topground.png");
     this.load.image("sky","1937.jpg");
-   // this.load.image("apple","Assets/apple.png");
     this.load.spritesheet("dude","dude.png",{frameWidth:32,frameHeight:48});
     this.load.image("coin", "coin.png");
     this.load.image("ray","ray.png");
-    this.load.image("child", "children.png");
+    this.load.image("carL", "carL.png")
+    this.load.image("carR", "carR.png")
     
 }
 
 
 
 function create(){
-    //W=wid;
-    //H = he;
+    
     W = game.config.width;
     H = game.config.height;
     
@@ -135,20 +132,6 @@ function create(){
     this.cursors = this.input.keyboard.createCursorKeys();
     
     
-    
-    //Add a group of apples = physical objects
-        //let fruits = this.physics.add.group({
-            //key: "apple",
-           // repeat : 7,
-          //  setScale : {x:0.2,y:0.2},
-        //    setXY : {x:20,y:0,stepX:150},
-      //  });
-    
-    //add bouncing effect to all the apples
-    //fruits.children.iterate(function(f){
-      //  f.setBounce(Phaser.Math.FloatBetween(0.4,0.7));
-//    });
-    
     //create coins
     let coins = this.physics.add.staticGroup();
     coins.create(700,300,'coin').setScale(0.07,0.07).refreshBody();
@@ -167,26 +150,22 @@ function create(){
     
     //create more platforms
     let platforms = this.physics.add.staticGroup();
-    platforms.create(500,400,'ground').setScale(2,0.5).refreshBody();
-    platforms.create(850,150,'ground').setScale(2,0.5).refreshBody();
-    platforms.create(100,250,'ground').setScale(2,0.5).refreshBody();
-     platforms.create(980,490,'ground').setScale(2,0.5).refreshBody();
-    platforms.create(1320,300,'ground').setScale(3,0.5).refreshBody();
-    platforms.create(100,560,'child').setScale(0.3,0.4).refreshBody();
-    platforms.create(1395,570,'child').setScale(0.3,0.4).refreshBody();
+    platforms.create(500,400,'ground').setScale(0.3,0.3).refreshBody();
+    platforms.create(850,150,'ground').setScale(0.3,0.3).refreshBody();
+    platforms.create(100,250,'ground').setScale(0.3,0.3).refreshBody();
+     platforms.create(980,490,'ground').setScale(0.3,0.3).refreshBody();
+    platforms.create(1320,300,'ground').setScale(0.3,0.3).refreshBody();
+    platforms.create(100,570,'carL').setScale(0.7,0.7).refreshBody();
+    platforms.create(1395,570,'carR').setScale(0.3,0.4).refreshBody();
     
     platforms.add(ground);
     
     this.physics.add.existing(ground,true);
-   // ground.body.allowGravity = false;
-    //ground.body.immovable = true;
+
     
     
     //add a collision detection between player and ground
     this.physics.add.collider(platforms,this.player);
-    //this.physics.add.collider(ground,fruits);
-  //  this.physics.add.collider(platforms,fruits);
-    //this.physics.add.overlap(this.player,fruits,eatFruit,null,this);
 
     this.physics.add.overlap(this.player,coins,takeCoin,null,this);
     
@@ -227,17 +206,8 @@ function update(){
     
 }
 
-//function eatFruit(player,fruit){
-  //  fruit.disableBody(true,true);
-    //window.open("https://narayanrachit.github.io/coronafighter/");
-    
-    //score += 10;
-    //scoreText.setText('Score: ' + score);
-//}
-
 function takeCoin(player,coins){
     coins.disableBody(true,true);
-    //window.open("https://narayanrachit.github.io/coronafighter/");
     
     score += 10;
     scoreText.setText('Score: ' + score);
